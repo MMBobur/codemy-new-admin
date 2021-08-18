@@ -1,0 +1,126 @@
+.navbar {
+  background-color: #060b26;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}
+
+.nav-menu {
+  background-color: #060b26;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  padding: 8px 0px 8px 10px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  transition: 0.2s ease;
+}
+
+.nav-text a:hover {
+  box-shadow: 0 0 0 4px #072b53d7;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+.xIcon {
+  border: 0.5px #050c33 solid;
+  padding: 7px;
+  border-radius: 9px;
+  font-size: 50px;
+  margin: 20px -5px;
+}
+.xIcon:hover {
+  background: #0f1744;
+  transition: ease 1s;
+  transform: scaleY(-1);
+}
+.navbar-toggle {
+  background-color: #060b26;
+  width: 100%;
+  height: 80px;
+}
+
+.span_title{
+  margin-left: 16px;
+}
+.button-header {
+  background-color: white;
+  font-weight: bold;
+  height: 38px;
+  width: 100px;
+  border-radius: 10px;
+  transition: 0.6s ease;
+  border: none;
+}
+.icons {
+  float: right;
+  display: flex;
+  position: absolute;
+  right: 10px;
+}
+.logout_div {
+  display: inline-block;
+  border: 2px rgb(8, 6, 97) solid;
+  width: 130px;
+  height: 60px;
+  margin-top: 12px;
+  position: absolute;
+  right: 50px;
+  top: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  color: #fff;
+  font-size: 17px;
+}
+.logout_div:hover {
+  background-color: #cf3d11;
+  border: none;
+  color: #fff;
+}
+.power {
+  color: red;
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: -4px;
+  font-size: 30px;
+  transition: 0.5s;
+}
+.logout_div:hover .power {
+  color: #ffffff;
+}
