@@ -27,8 +27,11 @@ export default function News() {
   const [open, setOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   
-  const [image, setImage] = useState(undefined);
+  const [category_id, setCategory_id] = useState('');
+
+  const [image, setImage] = useState('');
   const [Category_ID, setCategory_Id] = useState("");
+  const [Category_IDU, setCategory_IdU] = useState("");
   const [openDeleteSnackbar, setOpenDeleteSnackbar] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -64,8 +67,10 @@ export default function News() {
     setUpdateData({
       ...postData,
     });
+    setCategory_id(postData.category_id);    
     setModal(false);
     setOpen(true);
+
   };
 
   useEffect(() => {
@@ -106,6 +111,9 @@ export default function News() {
   const handleSetCategory = (id) => {
     setCategory_Id(id)
   }
+  const handleCategory = (id) => {
+    setCategory_IdU(id)
+  }
 
   const token = localStorage.getItem("token");
   const saveNews = (data) => {
@@ -132,7 +140,7 @@ export default function News() {
   const updateCate = (data) => {
     let formData = new FormData();
     formData.append("image", image);
-    formData.append("category_id", Category_ID);
+    formData.append("category_id", Category_IDU);
     formData.append("title", data.title);
     formData.append("text", data.text);
     formData.append("author", data.author);
@@ -151,7 +159,6 @@ export default function News() {
   };
   
   const deleteId = (postId) => {
-    console.log("postId: ", postId);
     service
       .remove("/news", postId.id, token)
       .then((res) => {
@@ -192,6 +199,7 @@ export default function News() {
         <Form posts={posts} deleteId={deleteId} handleData={handleData} />
       </Container>
       <ModalCom
+        category_id={category_id}
         open={open}
         handleClose={handleClose}
         saveNews={saveNews}
@@ -199,8 +207,10 @@ export default function News() {
         updateData={updateData}
         modal={modal}
         handleSetCategory = {handleSetCategory}
+        handleCategory = {handleCategory}
         setImageURL={setImage}
         category={category}
+        image={image}
       />
       <SnackBar open={openSnackbar}  modal={modal} handleClose={closeSnackbar}/>
       <DeleteSnackbar open={openDeleteSnackbar} handleClose={closeSnackbar} />

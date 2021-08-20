@@ -10,8 +10,7 @@ function Form({ posts, deleteId, handleData }) {
   const [clearPost, setClearPost] = useState();
 
   const handleOpen = (post) => {
-    console.log(post);
-    setClearPost(post)
+    setClearPost(post);
     setOpen(true);
   };
   const handleClose = () => {
@@ -48,7 +47,7 @@ function Form({ posts, deleteId, handleData }) {
                   <img
                     src={post.image}
                     alt={post.image}
-                    style={{ maxWidth: "100px" }}
+                    className="news-form-img"
                   />
                 </td>
                 <td>
