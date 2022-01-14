@@ -8,7 +8,6 @@ import { Button } from "@material-ui/core";
 
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
@@ -55,7 +54,10 @@ function ModalCom({
   updateCate,
   setImageURL,
   handleSetCategory,
-  category
+  handleCategory,
+  image,
+  category,
+  category_id,
 }) {
   const classes = useStyles();
   const initialNewsState = {
@@ -65,11 +67,12 @@ function ModalCom({
     text: "",
     author: "",
     data: "",
-    image: "",
+    image: ""
   };
   const [news, setNews] = useState(initialNewsState);
   const [update, setUpdate] = useState(initialNewsState);
-  const [cate, setСate] = useState("1");
+  const [cate, setСate] = useState("");
+  const [cateU, setСateU] = useState("");
 
   const required = "This field is required!";
 
@@ -82,134 +85,39 @@ function ModalCom({
   const [data, setData] = useState(false);
   const [dataError, setDataError] = useState(false);
   const [err, setErr] = useState(false);
-  const [categoryIdError, setCategoryIdError] = useState(false);                        
-  
-  
-  const handleSubmit = (data) => {
-    // if (cate === false) {
-    //   setCategoryIdError(required);
-    //   setErr(true);
-    //   if (data.title.length === 0) {
-    //     setTitleError(required);
-    //     setTitle(true);
-    //     if (data.text.length === 0) {
-    //       setTextError(required);
-    //       setText(true);
-    //       if (data.author.length === 0) {
-    //         setAuthorError(required);
-    //         setAuthor(true);
-    //         if (data.data.length === 0) {
-    //           setDataError(required);
-    //           setData(true);
-    //         }
-    //       }
-    //     }
-    //   }else if(data.title.length===0) {
 
-    //   }
-    // } else if (data.title.length === 0) {
-    //   setTitleError(required);
-    //   setTitle(true);
-    //   setCategoryIdError("");
-    //   setErr(false);
-    //   if (data.text.length === 0) {
-    //     setTextError(required);
-    //     setText(true);
-    //     if (data.author.length === 0) {
-    //       setAuthorError(required);
-    //       setAuthor(true);
-    //       if (data.data.length === 0) {
-    //         setDataError(required);
-    //         setData(true);
-    //       }
-    //     }
-    //   }
-    // } else if (data.text.length === 0) {
-    //   setTextError(required);
-    //   setText(true);
-    //   setTitleError("");
-    //   setTitle(false);
-    //   if (data.author.length === 0) {
-    //     setAuthorError(required);
-    //     setAuthor(true);
-    //     if (data.data.length === 0) {
-    //       setDataError(required);
-    //       setData(true);
-    //     }
-    //   }
-    // } else if (data.author.length === 0) {
-    //   setAuthorError(required);
-    //   setAuthor(true);
-    //   setTextError("");
-    //   setText(false);
-    //   if (data.data.length === 0) {
-    //     setDataError(required);
-    //     setData(true);
-    //   }
-    // } else if (data.data.length === 0) {
-    //   setDataError(required);
-    //   setData(true);
-    //   setAuthorError("");
-    //   setAuthor(false);
-    // } else {
-    //   if (modal) {
-    //     setDataError("");
-    //     setErr(false);
-    //     setTitle(false);
-    //     setText(false);
-    //     setAuthor(false);
-    //     setData(false);
-    //     saveNews(data);
-    //     setNews(initialNewsState);
-    //     setСate(false);
-    //   } else {
-    //     setDataError("");
-    //     setErr(false);
-    //     setTitle(false);
-    //     setText(false);
-    //     setAuthor(false);
-    //     setData(false);
-    //     updateCate(data);
-    //     setСate(false);
-    //     setUpdate(initialNewsState);
-    //   }
-    // }
-    if (data.title.length === 0) {
-      setTitleError(required);
-      setTitle(true);
-      setErr(false);
-    } else if (data.title.length < 5) {
-      setTitleError("Title must   be 5 characters at least!");
-      setTitle(true);
-      setErr(false);
-    }else if (data.text.length === 0) {
-      setTitleError("");
-      setTextError(required);
-      setText(true);
-      setTitle(false);
-    } else if (data.text.length < 5) {
-      setTitleError("");
-      setTextError("Title must be 5 characters at least!");
-      setText(true);
-      setTitle(false);
-    }else if (data.author.length === 0) {
-      setTextError("");
-      setAuthorError(required);
-      setAuthor(true);
-      setText(false);
-    } else if (data.author.length < 5) {
-      setTextError("");
-      setAuthorError("Title must be 5 characters at least!");
-      setAuthor(true);
-      setText(false);
-    }else if (data.data.length === 0) {
-      setAuthorError("");
-      setDataError(required);
-      setData(true);
-      setAuthor(false);
-    }else {
-      if (modal) {
-      setDataError("");
+
+  const handleSubmit = (data) => {
+    if (modal) {
+      if (cate === '') {
+        setErr(true)
+      }else if (data.title.length === 0) {
+        setTitleError(required);
+        setTitle(true);
+        setErr(false);
+      } else if (data.text.length === 0) {
+        setTitleError("");
+        setTextError(required);
+        setText(true);
+        setTitle(false);
+      } else if (data.text.length < 5) {
+        setTitleError("");
+        setTextError("Title must be 5 characters at least!");
+        setText(true);
+        setTitle(false);
+      } else if (data.author.length === 0) {
+        setTextError("");
+        setAuthorError(required);
+        setAuthor(true);
+        setText(false);
+      } else if (data.data.length === 0) {
+        setAuthorError("");
+        setDataError(required);
+        setData(true);
+        setAuthor(false);
+      } else {
+        setTextError("");
+        setDataError("");
         setErr(false);
         setTitle(false);
         setText(false);
@@ -217,23 +125,28 @@ function ModalCom({
         setData(false);
         saveNews(data);
         setNews(initialNewsState);
-      } else {
-      setDataError("");
-        setErr(false);
-        setTitle(false);
-        setText(false);
-        setAuthor(false);
-        setData(false);
-        updateCate(data);
-        setUpdate(initialNewsState);
+        setСate("")
+        setImageURL("")
       }
+    } else {
+      setСate("")
+      setСateU("")
+      setImageURL("")
+      updateCate(data);
+      setUpdate(initialNewsState);
     }
   };
 
+  useEffect( ()=>{ 
+      setСateU(category_id)
+    handleCategory(category_id);
+
+  },[category_id, handleCategory])
+
   useEffect(() => {
     setUpdate(updateData);
+    
   }, [updateData]);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -245,24 +158,31 @@ function ModalCom({
   const ddd = (e) => {
     setImageURL(e.target.files[0]);
   };
+
+
   const handleChange = (event) => {
+    if (cate==='') {
+      setErr(false)
+    }else{
+      setErr(true)
+    }
     setСate(event.target.value);
-    // Category_ID(event.target.value);
-    handleSetCategory(event.target.value)
+    handleSetCategory(event.target.value);
+  };
+  const handleChangU = (event) => {
+    setСateU(event.target.value);
+    handleCategory(event.target.value);
   };
 
   const add = (
     <form autoComplete="off">
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label" >
-          Choose category
-        </InputLabel>
+        <InputLabel id="demo-simple-select-label">Choose category</InputLabel>
         <Select
-           labelId="demo-simple-select-label"
+          labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={cate}
           onChange={handleChange}
-          // label="Age"
           error={err}
         >
           {category.map((cat) => {
@@ -347,15 +267,16 @@ function ModalCom({
   );
   const upd = (
     <form autoComplete="off">
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">
+      <FormControl className={classes.formControl}>
+        <InputLabel
+         id="demo-simple-select-outlined-label">
           Category ID
         </InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={cate}
-          onChange={handleChange}
+          value={cateU}
+          onChange={handleChangU}
           label="Age"
         >
           {category.map((cat) => {
@@ -446,11 +367,9 @@ function ModalCom({
                 color="primary"
                 variant="contained"
                 type="submit"
-                onClick={
-                  () => {
-                    handleSubmit(modal ? news : update);
-                  }
-                }
+                onClick={() => {
+                  handleSubmit(modal ? news : update);
+                }}
                 style={{
                   width: "100%",
                   padding: "15px 0px",
